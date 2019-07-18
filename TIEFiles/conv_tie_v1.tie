@@ -1,0 +1,192 @@
+/* Registres spécialisés*/
+state reg_A 32 add_read_write
+state reg_B 32 add_read_write
+state reg_C 32 add_read_write
+state reg_D 32 add_read_write
+state reg_E 32 add_read_write
+
+state reg_thresh_pos 32 add_read_write
+state reg_thresh_neg 32 add_read_write
+state reg_H 32 add_read_write
+state reg_I 32 add_read_write
+
+state reg_J 32 add_read_write
+state reg_K 32 add_read_write
+state reg_L 32 add_read_write
+state reg_M 32 add_read_write
+state reg_N 32 add_read_write
+
+state reg_O 32 add_read_write
+state reg_P 32 add_read_write
+state reg_Q 32 add_read_write
+state reg_R 32 add_read_write
+
+state reg_O1 32 add_read_write
+state reg_P1 32 add_read_write
+state reg_Q1 32 add_read_write
+state reg_R1 32 add_read_write
+
+state reg_S 32 add_read_write
+state reg_T 32 add_read_write
+state reg_U 32 add_read_write
+state reg_W 32 add_read_write
+
+state reg_A1 32 add_read_write
+state reg_B1 32 add_read_write
+state reg_C1 32 add_read_write
+state reg_D1 32 add_read_write
+state reg_E1 32 add_read_write
+
+
+state reg_J1 32 add_read_write
+state reg_K1 32 add_read_write
+state reg_L1 32 add_read_write
+state reg_M1 32 add_read_write
+state reg_N1 32 add_read_write
+
+
+state reg_A2 32 add_read_write
+state reg_B2 32 add_read_write
+state reg_C2 32 add_read_write
+state reg_D2 32 add_read_write
+state reg_E2 32 add_read_write
+
+
+state reg_J2 32 add_read_write
+state reg_K2 32 add_read_write
+state reg_L2 32 add_read_write
+state reg_M2 32 add_read_write
+state reg_N2 32 add_read_write
+
+state reg_A3 32 add_read_write
+state reg_B3 32 add_read_write
+state reg_C3 32 add_read_write
+state reg_D3 32 add_read_write
+state reg_E3 32 add_read_write
+
+
+state reg_J3 32 add_read_write
+state reg_K3 32 add_read_write
+state reg_L3 32 add_read_write
+state reg_M3 32 add_read_write
+state reg_N3 32 add_read_write
+
+state reg_A4 32 add_read_write
+state reg_B4 32 add_read_write
+state reg_C4 32 add_read_write
+state reg_D4 32 add_read_write
+state reg_E4 32 add_read_write
+
+
+state reg_J4 32 add_read_write
+state reg_K4 32 add_read_write
+state reg_L4 32 add_read_write
+state reg_M4 32 add_read_write
+state reg_N4 32 add_read_write
+
+
+
+operation tie_rowCalculation1  {out AR pix_Value}  {in reg_A, in reg_B, in reg_C,in reg_D, in reg_E, in reg_J, in reg_K, in reg_L, in reg_M, in reg_N}
+	{
+
+		wire[31:0] MUL1 = {{31{((!reg_A[1]) & reg_A[0] & reg_J[1] & reg_J[0]) | (reg_A[1] & reg_A[0] & (!reg_J[1]) & reg_J[0])}}, (reg_A[0] & reg_J[0])};
+		wire[31:0] MUL2 = {{31{((!reg_B[1]) & reg_B[0] & reg_K[1] & reg_K[0]) | (reg_B[1] & reg_B[0] & (!reg_K[1]) & reg_K[0])}}, (reg_B[0] & reg_K[0])};
+		wire[31:0] MUL3 = {{31{((!reg_C[1]) & reg_C[0] & reg_L[1] & reg_L[0]) | (reg_C[1] & reg_C[0] & (!reg_L[1]) & reg_L[0])}}, (reg_C[0] & reg_L[0])};
+		wire[31:0] MUL4 = {{31{((!reg_D[1]) & reg_D[0] & reg_M[1] & reg_M[0]) | (reg_D[1] & reg_D[0] & (!reg_M[1]) & reg_M[0])}}, (reg_D[0] & reg_M[0])};
+		wire[31:0] MUL5 = {{31{((!reg_E[1]) & reg_E[0] & reg_N[1] & reg_N[0]) | (reg_E[1] & reg_E[0] & (!reg_N[1]) & reg_N[0])}}, (reg_E[0] & reg_N[0])};
+		wire[31:0] ADD1 = MUL1 + MUL2;
+		wire[31:0] ADD2 = MUL3 + MUL4;
+		assign pix_Value  = ADD1 + ADD2 + MUL5;
+	}
+
+operation tie_rowCalculation2  {out AR pix_Value}  {in reg_A1, in reg_B1, in reg_C1,in reg_D1, in reg_E1, in reg_J1, in reg_K1, in reg_L1, in reg_M1, in reg_N1}
+	{
+		wire[31:0] MUL1 = {{31{((!reg_A1[1]) & reg_A1[0] & reg_J1[1] & reg_J1[0]) | (reg_A1[1] & reg_A1[0] & (!reg_J1[1]) & reg_J1[0])}}, (reg_A1[0] & reg_J1[0])};
+		wire[31:0] MUL2 = {{31{((!reg_B1[1]) & reg_B1[0] & reg_K1[1] & reg_K1[0]) | (reg_B1[1] & reg_B1[0] & (!reg_K1[1]) & reg_K1[0])}}, (reg_B1[0] & reg_K1[0])};
+		wire[31:0] MUL3 = {{31{((!reg_C1[1]) & reg_C1[0] & reg_L1[1] & reg_L1[0]) | (reg_C1[1] & reg_C1[0] & (!reg_L1[1]) & reg_L1[0])}}, (reg_C1[0] & reg_L1[0])};
+		wire[31:0] MUL4 = {{31{((!reg_D1[1]) & reg_D1[0] & reg_M1[1] & reg_M1[0]) | (reg_D1[1] & reg_D1[0] & (!reg_M1[1]) & reg_M1[0])}}, (reg_D1[0] & reg_M1[0])};
+		wire[31:0] MUL5 = {{31{((!reg_E1[1]) & reg_E1[0] & reg_N1[1] & reg_N1[0]) | (reg_E1[1] & reg_E1[0] & (!reg_N1[1]) & reg_N1[0])}}, (reg_E1[0] & reg_N1[0])};
+		wire[31:0] ADD1 = MUL1 + MUL2;
+		wire[31:0] ADD2 = MUL3 + MUL4;
+		assign pix_Value  = ADD1 + ADD2 + MUL5;
+	}
+	
+operation tie_rowCalculation3  {out AR pix_Value}  {in reg_A2, in reg_B2, in reg_C2,in reg_D2, in reg_E2, in reg_J2, in reg_K2, in reg_L2, in reg_M2, in reg_N2}
+	{
+		wire[31:0] MUL1 = {{31{((!reg_A2[1]) & reg_A2[0] & reg_J2[1] & reg_J2[0]) | (reg_A2[1] & reg_A2[0] & (!reg_J2[1]) & reg_J2[0])}}, (reg_A2[0] & reg_J2[0])};
+		wire[31:0] MUL2 = {{31{((!reg_B2[1]) & reg_B2[0] & reg_K2[1] & reg_K2[0]) | (reg_B2[1] & reg_B2[0] & (!reg_K2[1]) & reg_K2[0])}}, (reg_B2[0] & reg_K2[0])};
+		wire[31:0] MUL3 = {{31{((!reg_C2[1]) & reg_C2[0] & reg_L2[1] & reg_L2[0]) | (reg_C2[1] & reg_C2[0] & (!reg_L2[1]) & reg_L2[0])}}, (reg_C2[0] & reg_L2[0])};
+		wire[31:0] MUL4 = {{31{((!reg_D2[1]) & reg_D2[0] & reg_M2[1] & reg_M2[0]) | (reg_D2[1] & reg_D2[0] & (!reg_M2[1]) & reg_M2[0])}}, (reg_D2[0] & reg_M2[0])};
+		wire[31:0] MUL5 = {{31{((!reg_E2[1]) & reg_E2[0] & reg_N2[1] & reg_N2[0]) | (reg_E2[1] & reg_E2[0] & (!reg_N2[1]) & reg_N2[0])}}, (reg_E2[0] & reg_N2[0])};
+		wire[31:0] ADD1 = MUL1 + MUL2;
+		wire[31:0] ADD2 = MUL3 + MUL4;
+		assign pix_Value  = ADD1 + ADD2 + MUL5;
+	}
+	
+	
+operation tie_rowCalculation4  {out AR pix_Value}  {in reg_A3, in reg_B3, in reg_C3,in reg_D3, in reg_E3, in reg_J3, in reg_K3, in reg_L3, in reg_M3, in reg_N3}
+	{
+		wire[31:0] MUL1 = {{31{((!reg_A3[1]) & reg_A3[0] & reg_J3[1] & reg_J3[0]) | (reg_A3[1] & reg_A3[0] & (!reg_J3[1]) & reg_J3[0])}}, (reg_A3[0] & reg_J3[0])};
+		wire[31:0] MUL2 = {{31{((!reg_B3[1]) & reg_B3[0] & reg_K3[1] & reg_K3[0]) | (reg_B3[1] & reg_B3[0] & (!reg_K3[1]) & reg_K3[0])}}, (reg_B3[0] & reg_K3[0])};
+		wire[31:0] MUL3 = {{31{((!reg_C3[1]) & reg_C3[0] & reg_L3[1] & reg_L3[0]) | (reg_C3[1] & reg_C3[0] & (!reg_L3[1]) & reg_L3[0])}}, (reg_C3[0] & reg_L3[0])};
+		wire[31:0] MUL4 = {{31{((!reg_D3[1]) & reg_D3[0] & reg_M3[1] & reg_M3[0]) | (reg_D3[1] & reg_D3[0] & (!reg_M3[1]) & reg_M3[0])}}, (reg_D3[0] & reg_M3[0])};
+		wire[31:0] MUL5 = {{31{((!reg_E3[1]) & reg_E3[0] & reg_N3[1] & reg_N3[0]) | (reg_E3[1] & reg_E3[0] & (!reg_N3[1]) & reg_N3[0])}}, (reg_E3[0] & reg_N3[0])};
+		wire[31:0] ADD1 = MUL1 + MUL2;
+		wire[31:0] ADD2 = MUL3 + MUL4;
+		assign pix_Value  = ADD1 + ADD2 + MUL5;
+	}
+	
+operation tie_rowCalculation5  {out AR pix_Value}  {in reg_A4, in reg_B4, in reg_C4,in reg_D4, in reg_E4, in reg_J4, in reg_K4, in reg_L4, in reg_M4, in reg_N4}
+	{
+		wire[31:0] MUL1 = {{31{((!reg_A4[1]) & reg_A4[0] & reg_J4[1] & reg_J4[0]) | (reg_A4[1] & reg_A4[0] & (!reg_J4[1]) & reg_J4[0])}}, (reg_A4[0] & reg_J4[0])};
+		wire[31:0] MUL2 = {{31{((!reg_B4[1]) & reg_B4[0] & reg_K4[1] & reg_K4[0]) | (reg_B4[1] & reg_B4[0] & (!reg_K4[1]) & reg_K4[0])}}, (reg_B4[0] & reg_K4[0])};
+		wire[31:0] MUL3 = {{31{((!reg_C4[1]) & reg_C4[0] & reg_L4[1] & reg_L4[0]) | (reg_C4[1] & reg_C4[0] & (!reg_L4[1]) & reg_L4[0])}}, (reg_C4[0] & reg_L4[0])};
+		wire[31:0] MUL4 = {{31{((!reg_D4[1]) & reg_D4[0] & reg_M4[1] & reg_M4[0]) | (reg_D4[1] & reg_D4[0] & (!reg_M4[1]) & reg_M4[0])}}, (reg_D4[0] & reg_M4[0])};
+		wire[31:0] MUL5 = {{31{((!reg_E4[1]) & reg_E4[0] & reg_N4[1] & reg_N4[0]) | (reg_E4[1] & reg_E4[0] & (!reg_N4[1]) & reg_N4[0])}}, (reg_E4[0] & reg_N4[0])};
+		wire[31:0] ADD1 = MUL1 + MUL2;
+		wire[31:0] ADD2 = MUL3 + MUL4;
+		assign pix_Value  = ADD1 + ADD2 + MUL5;
+	}					
+
+operation thresholding_tie  {out AR pix_Value, in AR thr}  {}
+	{
+       wire[31:0] temp = (thr >= 1)?1:((thr <= (-1))?(-1):0);
+       assign pix_Value = temp;
+	}
+	
+operation maxpool_4_all  {out AR pix_Value}  {in reg_O, in reg_P, in reg_Q,in reg_R}
+	{
+       wire[31:0] temp1 = (reg_O >= reg_P) ? reg_O:reg_P;
+       wire[31:0] temp2 = (reg_Q >= reg_R) ? reg_Q:reg_R;
+       wire[31:0] temp  = (temp1 >= temp2) ? temp1:temp2;
+       assign pix_Value = temp;
+	}
+
+operation maxpool_4_all_1  {out AR pix_Value}  {in reg_O1, in reg_P1, in reg_Q1,in reg_R1}
+	{
+       wire[31:0] temp1 = (reg_O1 >= reg_P1) ? reg_O1:reg_P1;
+       wire[31:0] temp2 = (reg_Q1 >= reg_R1) ? reg_Q1:reg_R1;
+       wire[31:0] temp  = (temp1 >= temp2) ? temp1:temp2;
+       assign pix_Value = temp;
+	}
+	
+operation fc_t1  {out AR pix_Value}  {in reg_S, in reg_T, in reg_U,in reg_W}
+	{
+
+		wire[31:0] MUL1 = {{31{((!reg_S[1]) & reg_S[0] & reg_U[1] & reg_U[0]) | (reg_S[1] & reg_S[0] & (!reg_U[1]) & reg_U[0])}}, (reg_S[0] & reg_U[0])};
+		wire[31:0] MUL2 = {{31{((!reg_T[1]) & reg_T[0] & reg_W[1] & reg_W[0]) | (reg_T[1] & reg_T[0] & (!reg_W[1]) & reg_W[0])}}, (reg_T[0] & reg_W[0])};
+		assign pix_Value  = MUL1 + MUL2;
+	}
+
+operation fc4_t2  {out AR pix_Value}  {in reg_A, in reg_B, in reg_C,in reg_D, in reg_J, in reg_K, in reg_L, in reg_M}
+	{
+
+		wire[31:0] MUL1 = {{31{((!reg_A[1]) & reg_A[0] & reg_J[1] & reg_J[0]) | (reg_A[1] & reg_A[0] & (!reg_J[1]) & reg_J[0])}}, (reg_A[0] & reg_J[0])};
+		wire[31:0] MUL2 = {{31{((!reg_B[1]) & reg_B[0] & reg_K[1] & reg_K[0]) | (reg_B[1] & reg_B[0] & (!reg_K[1]) & reg_K[0])}}, (reg_B[0] & reg_K[0])};
+		wire[31:0] MUL3 = {{31{((!reg_C[1]) & reg_C[0] & reg_L[1] & reg_L[0]) | (reg_C[1] & reg_C[0] & (!reg_L[1]) & reg_L[0])}}, (reg_C[0] & reg_L[0])};
+		wire[31:0] MUL4 = {{31{((!reg_D[1]) & reg_D[0] & reg_M[1] & reg_M[0]) | (reg_D[1] & reg_D[0] & (!reg_M[1]) & reg_M[0])}}, (reg_D[0] & reg_M[0])};
+		wire[31:0] ADD1 = MUL1 + MUL2;
+		wire[31:0] ADD2 = MUL3 + MUL4;
+		assign pix_Value  = ADD1 + ADD2;
+	}	
+				
